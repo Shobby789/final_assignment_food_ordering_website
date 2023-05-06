@@ -1,0 +1,16 @@
+.instagram-section {
+  width: 100%;
+  min-height: 50vh;
+  background-color: whitesmoke;
+  padding-top: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+.instagram-section h3 {
+  text-transform: uppercase;
+  border: 2px solid black;
+  padding: 7px 9px;
+  font-weight: 300;
+}

@@ -1,0 +1,24 @@
+.dashboard {
+  width: 100%;
+  min-height: 100vh;
+  /* background-color: darkblue; */
+  color: white;
+  display: flex;
+}
+
+.dashboard .menu {
+  width: 15%;
+  min-height: 100vh;
+}
+
+.dashboard .menu a {
+  text-decoration: none;
+  color: black;
+  margin: 20px auto;
+}
+
+.dashboard .pages {
+  width: 85%;
+  min-height: 100vh;
+  background-color: black;
+}

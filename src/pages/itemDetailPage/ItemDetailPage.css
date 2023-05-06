@@ -1,0 +1,19 @@
+.detailPage {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 80px;
+}
+
+@media screen and (max-width: 480px) {
+  .detailPage {
+    flex-direction: column;
+    padding: 0;
+  }
+
+  .image {
+    width: 90%;
+  }
+}

@@ -1,0 +1,31 @@
+.menu-section {
+  width: 100%;
+  text-align: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 50px;
+}
+
+.menu-section p {
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.menu-section h1 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+.items {
+  padding: 40px;
+  width: 100%;
+  /* height: auto; */
+  min-height: 120vh;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  /* margin-bottom: 50px; */
+}
