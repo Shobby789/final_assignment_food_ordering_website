@@ -8,6 +8,7 @@ import ItemCard from "../../components/itemCard/ItemCard";
 
 export default function Home() {
   const [items, setItems] = useState([]);
+  const [itemImage, setItemImage] = useState([]);
 
   // getting products on home screen
   useEffect(() => {
@@ -16,8 +17,10 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((data) => {
-        console.log("Food_items: ", data.data);
-        setItems(data.data);
+        console.log("Food_images[1]: ", data.data[1]);
+        console.log("Food_items[0]: ", data.data[0]);
+        setItems(data.data[0]);
+        setItemImage(data.data[1].image);
         // setCategory(data.data[0]);
       });
   }, []);

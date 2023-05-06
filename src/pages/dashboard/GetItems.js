@@ -17,7 +17,7 @@ export default function GetItems() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setItems(data.data);
+        setItems(data.data[0]);
       });
   };
   useEffect(() => {

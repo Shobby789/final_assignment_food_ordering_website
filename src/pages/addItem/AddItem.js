@@ -1,4 +1,4 @@
-import { Button, TextField, Container } from "@mui/material";
+import { Button, TextField, Container, CardMedia } from "@mui/material";
 import axios from "axios";
 import React, { useState } from "react";
 
@@ -8,8 +8,9 @@ export default function AddItem() {
     itemDescription: "",
     itemPrice: 0,
     itemCategory: "",
-    itemImage: "",
   });
+
+  const [image, setImage] = useState("");
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -22,6 +23,31 @@ export default function AddItem() {
     console.log(item.itemImage);
   };
 
+  const convertToBase64 = (e) => {
+    console.log(e);
+    const reader = new FileReader();
+    reader.readAsDataURL(e.target.files[0]);
+    reader.onload = () => {
+      console.log(reader.result);
+      setImage(reader.result);
+    };
+    reader.onerror = (error) => {
+      console.log("Errr: " + error);
+    };
+  };
+
+  const uploadImage = () => {
+    fetch("http://localhost8000/api/uploadItemImage", {
+      method: "POST",
+      crossDomain: true,
+      headers: {
+        "Content-Type": "application/json",
+        Accespt: "application/json",
+        "Access-Control-Allow-Origin": "*",
+      },
+      body: JSON.stringify({ base64: image }),
+    });
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
     const formData = new FormData();
@@ -31,7 +57,7 @@ export default function AddItem() {
     formData.append("itemCategory", item.itemCategory);
     formData.append("itemImage", item.itemImage);
 
-    console.log(item.itemImage);
+    // console.log(item.itemImage);
 
     axios
       .post("http://localhost:8000/api/addItem", formData, {
@@ -44,6 +70,7 @@ export default function AddItem() {
         console.log(err);
       });
 
+    uploadImage();
     setItem({
       itemName: "",
       itemDescription: "",
@@ -138,10 +165,10 @@ export default function AddItem() {
           Upload Item Image
           <input
             hidden
-            accept=".png, .jpeg, .jpg"
+            accept="image/*"
             type="file"
-            name="itemImage"
-            onChange={handlePhoto}
+            name="image"
+            onChange={convertToBase64}
           />
         </Button>
         <Button
