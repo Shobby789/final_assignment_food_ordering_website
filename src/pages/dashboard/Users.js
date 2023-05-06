@@ -28,9 +28,9 @@ export default function Users() {
         // console.log("All Users", data.data);
         setUsers(data.data);
       });
-  }, []);
+  }, [users]);
   return (
-    <>
+    <div style={{ width: "100%", minHeight: "80vh", backgroundColor: "white" }}>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} size="small" aria-label="a dense table">
           <TableHead>
@@ -76,6 +76,6 @@ export default function Users() {
       >
         Logout
       </button>
-    </>
+    </div>
   );
 }

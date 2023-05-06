@@ -16,7 +16,7 @@ export default function Home() {
     })
       .then((res) => res.json())
       .then((data) => {
-        // console.log("Food_items: ", data.data[1]);
+        console.log("Food_items: ", data.data);
         setItems(data.data);
         // setCategory(data.data[0]);
       });
