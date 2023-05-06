@@ -7,6 +7,7 @@ import Box from "@mui/material/Box";
 import Users from "../../pages/dashboard/Users";
 import GetItems from "../../pages/dashboard/GetItems";
 import AddItem from "../../pages/addItem/AddItem";
+import { Button } from "@mui/material";
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -74,6 +75,7 @@ export default function BasicTabs() {
       <TabPanel value={value} index={3}>
         See All Orders
       </TabPanel>
+      {/* <Button variant="contained">Button</Button> */}
     </Box>
   );
 }

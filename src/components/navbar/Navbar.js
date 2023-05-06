@@ -14,7 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import { Link, useNavigate } from "react-router-dom";
 
 const pages = ["Home", "Cart"];
-const settings = ["Profile", "Dashboard"];
+const settings = ["Profile"];
 
 function ResponsiveAppBar() {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -41,6 +41,8 @@ function ResponsiveAppBar() {
     window.localStorage.removeItem("userEmail");
     navigate("/");
   };
+
+  const UserType = window.localStorage.getItem("UserType");
 
   return (
     <AppBar position="static" color="transparent">
@@ -175,6 +177,7 @@ function ResponsiveAppBar() {
                   </Link>
                 </MenuItem>
               ))}
+              {UserType === "Admin" ? <Button>Dashboard</Button> : null}
               <Button
                 sx={{
                   color: "black",

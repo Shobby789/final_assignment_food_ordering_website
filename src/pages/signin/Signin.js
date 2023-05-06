@@ -8,6 +8,7 @@ export default function Signin() {
     email: "",
     password: "",
   });
+  const [admin, setAdmin] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -24,9 +25,14 @@ export default function Signin() {
       .then((res) => res.json())
       .then((data) => {
         console.log(data, "User logged in msg from frontend");
-        window.localStorage.setItem("token", data.data);
+        window.localStorage.setItem("token", data.data[1]);
         window.localStorage.setItem("userEmail", loginData.email);
-        navigate("/Home");
+        if (data.data[0].UserType === "Admin") {
+          // localStorage.setItem("UserType", data.data[0].UserType);
+          navigate("/Dashboard");
+        } else {
+          navigate("/Home");
+        }
       });
 
     setLoginData({
