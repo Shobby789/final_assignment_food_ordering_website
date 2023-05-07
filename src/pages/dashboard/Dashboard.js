@@ -10,6 +10,7 @@ import MenuList from "@mui/material/MenuList";
 import Stack from "@mui/material/Stack";
 import { Link } from "react-router-dom";
 import DashboardSidebar from "../../components/dashboardSidebar/DashboardSidebar";
+import DashboardAppBar from "../../components/dashboardSidebar/DashboardAppBar";
 
 export default function Dashboard() {
   const [open, setOpen] = React.useState(false);
@@ -48,6 +49,7 @@ export default function Dashboard() {
   return (
     <>
       <DashboardSidebar />
+      {/* <DashboardAppBar /> */}
     </>
   );
 }

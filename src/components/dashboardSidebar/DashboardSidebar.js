@@ -73,7 +73,7 @@ export default function BasicTabs() {
         <AddItem />
       </TabPanel>
       <TabPanel value={value} index={3}>
-        See All Orders
+        Orders
       </TabPanel>
       {/* <Button variant="contained">Button</Button> */}
     </>

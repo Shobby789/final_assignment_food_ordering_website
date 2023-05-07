@@ -28,7 +28,7 @@ export default function Signin() {
         window.localStorage.setItem("token", data.data[1]);
         window.localStorage.setItem("userEmail", loginData.email);
         if (data.data[0].UserType === "Admin") {
-          // localStorage.setItem("UserType", data.data[0].UserType);
+          localStorage.setItem("UserType", data.data[0].UserType);
           navigate("/Dashboard");
         } else {
           navigate("/Home");

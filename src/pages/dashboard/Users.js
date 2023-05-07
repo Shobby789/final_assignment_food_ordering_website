@@ -14,8 +14,7 @@ export default function Users() {
 
   const navigate = useNavigate();
   const handleLogout = () => {
-    window.localStorage.removeItem("token");
-    window.localStorage.removeItem("userEmail");
+    window.localStorage.clear();
     navigate("/");
   };
 

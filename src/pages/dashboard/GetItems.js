@@ -7,9 +7,13 @@ import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import Paper from "@mui/material/Paper";
 import { Button } from "@mui/material";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function GetItems() {
   const [items, setItems] = useState([]);
+
+  const navigate = useNavigate();
+  const params = useParams();
 
   const getItems = async () => {
     await fetch("http://localhost:8000/api/getFoodItems", {
@@ -17,7 +21,7 @@ export default function GetItems() {
     })
       .then((res) => res.json())
       .then((data) => {
-        setItems(data.data[0]);
+        setItems(data.data);
       });
   };
   useEffect(() => {
@@ -32,14 +36,17 @@ export default function GetItems() {
       .then((err) => console.log(err));
   };
   const handleUpdate = async (_id) => {
-    await fetch(`http://localhost:8000/api/editItem/` + _id, {
+    await fetch(`http://localhost:8000/api/editItem/${params._id}`, {
       method: "GET",
     })
       .then((res) => res.json())
-      .then((data) => console.log(data.data));
+      .then((data) => {
+        console.log(data.data);
+        navigate("/Dashboard/Update/:id");
+      });
   };
   return (
-    <div>
+    <>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
           <TableHead>
@@ -66,13 +73,17 @@ export default function GetItems() {
                   <Button onClick={() => handleDelete(item._id)}>Delete</Button>
                 </TableCell>
                 <TableCell align="center">
-                  <Button onClick={() => handleUpdate(item._id)}>Edit</Button>
+                  <Button
+                    onClick={() => navigate(`/Dashboard/Update/${item._id}`)}
+                  >
+                    Edit
+                  </Button>
                 </TableCell>
               </TableRow>
             ))}
           </TableBody>
         </Table>
       </TableContainer>
-    </div>
+    </>
   );
 }

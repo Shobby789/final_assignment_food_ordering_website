@@ -7,6 +7,7 @@ import Typography from "@mui/material/Typography";
 import { Button } from "@mui/material";
 import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
+import { useNavigate } from "react-router-dom";
 
 export default function ItemCard({
   _id,
@@ -16,6 +17,7 @@ export default function ItemCard({
   itemPrice,
 }) {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   return (
     <>
@@ -47,6 +49,14 @@ export default function ItemCard({
             variant="contained"
             color="success"
             size="small"
+            onClick={() => navigate(`/Home/getItemDetail/${_id}`)}
+          >
+            View Details
+          </Button>
+          <Button
+            variant="contained"
+            color="success"
+            size="small"
             onClick={() =>
               dispatch(
                 addToCart({
@@ -59,11 +69,22 @@ export default function ItemCard({
               )
             }
           >
-            Add to cart
+            Add To Cart
           </Button>
         </CardActions>
       </Card>
-      {/* ); })} */}
     </>
   );
 }
+
+// onClick={() =>
+//   dispatch(
+//     addToCart({
+//       _id,
+//       itemName,
+//       itemImage,
+//       itemPrice,
+//       itemDescription,
+//     })
+//   )
+// }

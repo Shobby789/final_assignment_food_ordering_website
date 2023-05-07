@@ -8,8 +8,8 @@ export default function AddItem() {
     itemDescription: "",
     itemPrice: 0,
     itemCategory: "",
+    itemImage: "",
   });
-
   const [image, setImage] = useState("");
 
   const handleChange = (event) => {
@@ -31,19 +31,20 @@ export default function AddItem() {
       reader.onerror = (error) => reject(error);
     });
 
-  const uploadImage = () => {
-    fetch("http://localhost8000/api/uploadItemImage", {
-      method: "POST",
-      crossDomain: true,
-      headers: {
-        "Content-Type": "application/json",
-        Accespt: "application/json",
-        "Access-Control-Allow-Origin": "*",
-      },
-      body: JSON.stringify({ base64: image }),
-    });
-  };
-  const handleSubmit = (e) => {
+  // const uploadImage = () => {
+  //   fetch("http://localhost8000/api/uploadItemImage", {
+  //     method: "POST",
+  //     crossDomain: true,
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //       Accespt: "application/json",
+  //       "Access-Control-Allow-Origin": "*",
+  //     },
+  //     body: JSON.stringify({ base64: image }),
+  //   });
+  // };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData();
     formData.append("itemName", item.itemName);
@@ -52,20 +53,19 @@ export default function AddItem() {
     formData.append("itemCategory", item.itemCategory);
     formData.append("itemImage", item.itemImage);
 
-    // console.log(item.itemImage);
-
-    axios
-      .post("http://localhost:8000/api/addItem", formData, {
-        headers: { Authorization: localStorage.getItem("token") },
-      })
+    await fetch("http://localhost:8000/api/addItem", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(item),
+    })
       .then((res) => {
-        console.log(res.data);
+        console.log("Res: " + res);
       })
       .catch((err) => {
-        console.log(err);
+        console.log("Err: " + err);
       });
 
-    uploadImage();
+    // uploadImage();
     setItem({
       itemName: "",
       itemDescription: "",
@@ -132,34 +132,26 @@ export default function AddItem() {
           value={item.itemPrice}
           onChange={handleChange}
         />
-        {/* <TextField
-          placeholder="itemName"
-          name="itemName"
-          value={item.itemName}
+        <TextField
+          id="outlined-basic"
+          label="Item Image"
+          variant="outlined"
+          color="success"
+          name="itemImage"
+          value={item.itemImage}
           onChange={handleChange}
         />
-        <TextField
-          placeholder="Item Description"
-          name="itemDescription"
-          value={item.itemDescription}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Item Category"
-          name="itemCategory"
-          value={item.itemCategory}
-          onChange={handleChange}
-        />
-        <TextField
-          placeholder="Item Price"
-          name="itemPrice"
-          value={item.itemPrice}
-          onChange={handleChange}
-        /> */}
-        <Button variant="contained" component="label">
+
+        {/* <Button variant="contained" component="label">
           Upload Item Image
-          <input hidden accept="image/*" type="file" name="image" />
-        </Button>
+          <input
+            hidden
+            accept="image/*"
+            type="file"
+            name="image"
+            onChange={(e) => setImage(e.target.files[0])}
+          />
+        </Button> */}
         <Button
           variant="contained"
           color="success"
